@@ -1,0 +1,120 @@
+/* Custom styling for NetSapiens portal */
+
+/* Header / navbar styles */
+.navbar,
+.navbar-default,
+.navbar-inverse,
+.header-bar,
+#header,
+.top-nav,
+#ns-topbar {
+  background: linear-gradient(135deg, #1f5fbf 0%, #6c2dc7 100%) !important;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-nav > li > a,
+.navbar .nav > li > a,
+.top-nav .nav > li > a,
+#ns-topbar .nav > li > a,
+.navbar-nav > li > button,
+.navbar .nav > li > button,
+.support-button-link {
+  color: #ffffff !important;
+  font-weight: 600;
+  padding: 10px 18px;
+  margin: 6px 6px;
+  border-radius: 24px;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-nav > li > a:hover,
+.navbar .nav > li > a:hover,
+.navbar-nav > li.active > a,
+.navbar .nav > li.active > a,
+.navbar-nav > li > a:focus,
+.navbar .nav > li > a:focus,
+.support-button-link:hover,
+.support-button-link:focus {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.navbar-nav > li > a .glyphicon,
+.navbar-nav > li > a .fa,
+.navbar-nav > li > a i {
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+/* Dashboard card styling */
+.panel,
+.card,
+.widget,
+.dashboard-card,
+.info-box,
+.stats-card,
+.tile,
+.box {
+  border-radius: 16px !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.15) !important;
+  border: none !important;
+  overflow: hidden;
+}
+
+.panel-heading,
+.card-header,
+.widget-header,
+.box-header {
+  border-top-left-radius: 16px !important;
+  border-top-right-radius: 16px !important;
+  background-color: rgba(31, 95, 191, 0.08) !important;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.05) !important;
+}
+
+.panel-body,
+.card-body,
+.widget-body,
+.box-body {
+  background-color: #ffffff;
+  color: #1f2937;
+}
+
+/* Table and content adjustments */
+.table > thead > tr > th {
+  border-bottom-width: 1px;
+  font-weight: 600;
+}
+
+body {
+  background-color: #f3f4f6;
+}
+
+/* Ensure buttons inside panels follow rounded style */
+.panel .btn,
+.card .btn,
+.widget .btn,
+.box .btn {
+  border-radius: 999px;
+}
+
+/* Support button specific styling */
+.navbar-nav > li.support-button > a,
+.support-button-link.support-button {
+  background-color: #ff7a18;
+  color: #ffffff !important;
+}
+
+.navbar-nav > li.support-button > a:hover,
+.navbar-nav > li.support-button > a:focus,
+.support-button-link.support-button:hover,
+.support-button-link.support-button:focus {
+  background-color: #ff9a4d;
+  color: #ffffff !important;
+}
