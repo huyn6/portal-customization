@@ -86,7 +86,9 @@
       return "";
     }
     var clone = node.cloneNode(true);
-    Array.prototype.slice.call(clone.querySelectorAll(".nav-bg-image, svg, img, use, picture, .ns-icon")).forEach(function (child) {
+    Array.prototype.slice.call(
+      clone.querySelectorAll(".nav-bg-image, svg, img, use, picture, .ns-icon, .ns-nav-label")
+    ).forEach(function (child) {
       child.remove();
     });
     return (clone.textContent || "").replace(/\s+/g, " ").trim();
@@ -100,25 +102,56 @@
     if (!link) {
       return null;
     }
-    if (link.dataset.auroraIcon === id) {
-      Array.prototype.slice.call(link.querySelectorAll("div.nav-bg-image, span.nav-bg-image")).forEach(function (legacy) {
-        legacy.remove();
-      });
-      return link;
+    var labelText = textContentWithoutChrome(link);
+    if (!labelText) {
+      labelText = link.getAttribute("data-label") || link.getAttribute("aria-label") || link.getAttribute("title") || id;
     }
-    link.dataset.auroraIcon = id;
-    Array.prototype.slice.call(link.querySelectorAll("i, span[class*='icon'], span.nav-bg-image, div.nav-bg-image, svg.ns-icon"))
-      .forEach(function (node) {
-        node.remove();
+    var fallback = labelText.replace(/[-_]+/g, " ");
+    fallback = fallback.replace(/\s+/g, " ").trim();
+    if (!fallback) {
+      fallback = id.replace(/[-_]+/g, " ").replace(/\b\w/g, function (match) {
+        return match.toUpperCase();
       });
-    link.insertBefore(iconElement(id), link.firstChild);
-    var label = textContentWithoutChrome(link);
-    if (label && !link.getAttribute("aria-label")) {
-      link.setAttribute("aria-label", label);
+    }
+    labelText = fallback;
+
+    var badges = Array.prototype.map.call(link.querySelectorAll(".badge"), function (badge) {
+      return badge.cloneNode(true);
+    });
+
+    Array.prototype.slice.call(link.querySelectorAll("div.nav-bg-image, span.nav-bg-image")).forEach(function (legacy) {
+      legacy.remove();
+    });
+
+    link.dataset.auroraIcon = id;
+    link.classList.add("ns-nav-link");
+    link.setAttribute("data-aurora-nav", "true");
+    link.innerHTML = "";
+
+    var icon = iconElement(id);
+    link.appendChild(icon);
+
+    var labelWrapper = document.createElement("span");
+    labelWrapper.className = "ns-nav-label";
+    var labelCore = document.createElement("span");
+    labelCore.className = "ns-nav-label-text";
+    labelCore.textContent = labelText;
+    labelWrapper.appendChild(labelCore);
+
+    badges.forEach(function (badge) {
+      badge.classList.add("ns-nav-badge");
+      labelWrapper.appendChild(badge);
+    });
+
+    link.appendChild(labelWrapper);
+
+    if (labelText) {
+      link.setAttribute("aria-label", labelText);
     }
     if (!link.getAttribute("title")) {
-      link.setAttribute("title", link.getAttribute("aria-label") || id);
+      link.setAttribute("title", labelText);
     }
+
     Array.prototype.slice.call((target.matches && target.matches("li, div")) ? target.querySelectorAll(".nav-bg-image") : [])
       .forEach(function (legacyIcon) {
         legacyIcon.remove();

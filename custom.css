@@ -229,6 +229,13 @@ textarea:focus-visible,
   flex-wrap: wrap;
 }
 
+.navigation-subbar .nav > li,
+#ns-topbar .nav > li,
+.header-bar .nav > li,
+.navbar .nav > li {
+  background: transparent !important;
+}
+
 .navigation-subbar .nav > li > a,
 .navigation-subbar .nav > li > button,
 #ns-topbar .nav > li > a,
@@ -236,17 +243,27 @@ textarea:focus-visible,
 .header-bar .nav > li > a,
 .navbar .nav > li > a {
   display: inline-flex !important;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: var(--aurora-space-3);
-  padding: var(--aurora-space-4) var(--aurora-space-10) !important;
-  border-radius: var(--aurora-radius-pill) !important;
+  min-width: 88px;
+  min-height: 72px;
+  padding: var(--aurora-space-4) var(--aurora-space-6) !important;
+  border-radius: var(--aurora-radius-md) !important;
   border: 1px solid transparent !important;
-  background: rgba(255, 255, 255, 0.18) !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
   color: var(--aurora-text-inverse) !important;
+  font-size: var(--aurora-text-sm);
   font-weight: 600;
   letter-spacing: 0.01em;
+  text-align: center;
+  text-transform: none;
   transition: transform var(--aurora-duration-fast) var(--aurora-ease),
     box-shadow var(--aurora-duration-fast) var(--aurora-ease),
+    border-color var(--aurora-duration-fast) var(--aurora-ease),
     background var(--aurora-duration-fast) var(--aurora-ease);
 }
 
@@ -258,16 +275,18 @@ textarea:focus-visible,
 .header-bar .nav > li > a:focus-visible,
 .navbar .nav > li > a:hover,
 .navbar .nav > li > a:focus-visible {
-  transform: translateY(-1px);
-  box-shadow: 0 18px 38px -24px rgba(0, 0, 0, 0.6);
-  background: rgba(255, 255, 255, 0.28) !important;
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.32) !important;
+  background: rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 22px 46px -28px rgba(0, 0, 0, 0.55);
 }
 
 .navigation-subbar .nav > li.active > a,
 .header-bar .nav > li.active > a,
 .navbar .nav > li.active > a {
-  background: rgba(255, 255, 255, 0.35) !important;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.22) !important;
+  border-color: rgba(255, 255, 255, 0.38) !important;
+  box-shadow: 0 24px 48px -30px rgba(0, 0, 0, 0.5);
 }
 
 .navigation-subbar .nav-bg-image,
@@ -275,6 +294,42 @@ textarea:focus-visible,
 .header-bar .nav-bg-image,
 .navbar .nav-bg-image {
   display: none !important;
+}
+
+.ns-nav-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.ns-nav-link .ns-icon {
+  width: 26px;
+  height: 26px;
+  margin-bottom: var(--aurora-space-2);
+  color: currentColor;
+}
+
+.ns-nav-link .ns-nav-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  color: var(--aurora-text-inverse);
+  line-height: 1.25;
+}
+
+.ns-nav-link .ns-nav-label-text {
+  font-size: var(--aurora-text-sm);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.ns-nav-link .ns-nav-label .badge {
+  margin-top: var(--aurora-space-2);
+  align-self: center;
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--aurora-text-inverse);
+  border-radius: var(--aurora-radius-pill);
+  padding: 0 var(--aurora-space-3);
+  font-size: var(--aurora-text-xs);
 }
 
 .ns-header-actions {
@@ -992,6 +1047,17 @@ body.ns-drawer-open {
 
   .ns-quick-actions__btn {
     flex: 1 1 calc(50% - var(--aurora-space-6));
+  }
+
+  .navigation-subbar .nav > li > a,
+  .navigation-subbar .nav > li > button,
+  #ns-topbar .nav > li > a,
+  #ns-topbar .nav > li > button,
+  .header-bar .nav > li > a,
+  .navbar .nav > li > a {
+    min-width: 72px;
+    min-height: 64px;
+    padding: var(--aurora-space-4) var(--aurora-space-4) !important;
   }
 }
 
